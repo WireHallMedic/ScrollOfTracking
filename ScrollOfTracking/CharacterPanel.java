@@ -91,12 +91,12 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
    }
    
    // update luck points field when name is entered
-   public void keyPressed(KeyEvent ke){}
-   public void keyTyped(KeyEvent ke){}
    public void keyReleased(KeyEvent ke)
    {
       updateLuckPointsField();
    }
+   public void keyPressed(KeyEvent ke){}
+   public void keyTyped(KeyEvent ke){}
    
    // clear a row
    public void clear()
@@ -117,7 +117,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
    // update the luck points field
    public void updateLuckPointsField()
    {
-      if(nameF.getText().equals(""))
+      if(nameF.getText().equals("") && luckPoints == 0)
       {
          luckPointsF.setText("");
       }
