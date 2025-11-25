@@ -8,6 +8,7 @@ import java.util.*;
 
 public class SoTFrame extends JFrame
 {
+   private static final String VERSION_STRING = "v1.0.0";
    private TimerPanel timerPanel;
    private RowPanel[] rowPanel;
    private JPanel backgroundPanel;
@@ -22,7 +23,7 @@ public class SoTFrame extends JFrame
    {
       super();
       setSize(1400, 800);
-      setTitle("Scroll of Tracking");
+      setTitle("Scroll of Tracking " + VERSION_STRING);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       
       timer = new javax.swing.Timer(1000, null);
