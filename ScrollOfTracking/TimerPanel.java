@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class TimerPanel extends SoTPanel implements ActionListener
+public class TimerPanel extends SoTPanel implements ActionListener, MouseListener
 {
 	private int curTime;
 	private int maxTime;
@@ -42,6 +42,7 @@ public class TimerPanel extends SoTPanel implements ActionListener
       runF = false;
       timeF = new JTextField("");
       timeF.setHorizontalAlignment(SwingConstants.CENTER);
+      timeF.addMouseListener(this);
       runB = new JButton("Start");
       resetB = new JButton("Reset");
       add(timeF);
@@ -72,14 +73,7 @@ public class TimerPanel extends SoTPanel implements ActionListener
       }
       if(ae.getSource() == runB)
       {
-         runF = !runF;
-         if(runF)
-         {
-            curTime = getTimeInt();
-            runB.setText("Pause");
-         }
-         else
-            runB.setText("Start");
+         togglePause();
       }
       if(ae.getSource() == resetB)
       {
@@ -88,6 +82,18 @@ public class TimerPanel extends SoTPanel implements ActionListener
       }
       if(runF)
          displayTime();
+   }
+   
+   private void togglePause()
+   {
+      runF = !runF;
+      if(runF)
+      {
+         curTime = getTimeInt();
+         runB.setText("Pause");
+      }
+      else
+         runB.setText("Start");
    }
    
    public void displayTime()
@@ -143,6 +149,20 @@ public class TimerPanel extends SoTPanel implements ActionListener
       catch(Exception ex){}
       return maxTime;
    }
+   
+   // mouseListener stuff
+   public void mouseClicked(MouseEvent e)
+   {
+      if(runF && e.getSource() == timeF)
+      {
+         togglePause();
+      }
+   }
+   public void mousePressed(MouseEvent e) {}
+   public void mouseReleased(MouseEvent e) {}
+   public void mouseEntered(MouseEvent e) {}
+   public void mouseExited(MouseEvent e) {}
+
    
    public String serialize()
    {
