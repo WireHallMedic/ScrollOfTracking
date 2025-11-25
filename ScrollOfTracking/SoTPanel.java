@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+// abstact JPanel for managing layout
 public abstract class SoTPanel extends JPanel implements ComponentListener
 {
    public static final double SMALL_ELEMENT_WIDTH = .05;
@@ -14,6 +15,7 @@ public abstract class SoTPanel extends JPanel implements ComponentListener
    
    public void setInsets(Insets i){insets = i;}
    
+   // initializer
    public SoTPanel()
    {
       super();
@@ -22,7 +24,8 @@ public abstract class SoTPanel extends JPanel implements ComponentListener
       addComponentListener(this);
    }
    
-   public void arrangeElement(JComponent c, double x, double y, double w, double h)
+   // sets placement (x, y) and size (w, h) as proportion of this. Domain is (0.0, 1.0].
+   protected void arrangeElement(JComponent c, double x, double y, double w, double h)
    {
       int width = this.getWidth();
       int height = this.getHeight();
@@ -31,7 +34,8 @@ public abstract class SoTPanel extends JPanel implements ComponentListener
       setFontSize(c);
    }
    
-   public int calcFontSize(JComponent c)
+   // calculate font size based on component size
+   protected int calcFontSize(JComponent c)
    {
       int pixelSize = Math.min(c.getWidth(), c.getHeight());
       if(c instanceof JButton)
@@ -41,6 +45,7 @@ public abstract class SoTPanel extends JPanel implements ComponentListener
       return pixelSize;
    }
    
+   // set font size
    private void setFontSize(JComponent c)
    {
       Font f = new Font("Serif", Font.PLAIN, calcFontSize(c));
@@ -50,6 +55,7 @@ public abstract class SoTPanel extends JPanel implements ComponentListener
    // implemented in child classes to repeatedly call arrangeElement()
    public abstract void arrangeElements();
    
+   // not used but needed by interface
    public void componentResized(ComponentEvent ce){arrangeElements();}
    public void componentMoved(ComponentEvent ce){}
    public void componentHidden(ComponentEvent ce){}

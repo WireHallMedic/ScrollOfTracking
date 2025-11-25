@@ -1,5 +1,6 @@
 package ScrollOfTracking;
 
+// entry point for application
 public class SoTMain
 {
    

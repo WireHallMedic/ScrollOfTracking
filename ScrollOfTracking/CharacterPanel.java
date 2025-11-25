@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+// holds most of the information of a row (not the condition text field)
 public class CharacterPanel extends SoTPanel implements ActionListener, KeyListener
 {
    public static final double SMALL_ELEMENT_WIDTH = .05;
@@ -20,6 +21,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
    private int luckPoints;
    private RowPanel parent;
    
+   // initializer
    public CharacterPanel(RowPanel rowPanel)
    {
       super();
@@ -29,6 +31,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       luckPointsF = new JTextField("0");
       luckPointsF.setHorizontalAlignment(JTextField.CENTER);
       luckPointsF.setEditable(false);
+      luckPointsF.setFocusable(false);
       addFPB = new JButton("+");
       removeFPB = new JButton("-");
       initF = new JTextField("");
@@ -59,6 +62,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       arrangeElements();
    }
    
+   // set background color
    @Override
    public void setBackground(Color c)
    {
@@ -67,6 +71,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
          hasActedCB.setBackground(c);
    }
    
+   // perform action when a button is pressed
    public void actionPerformed(ActionEvent ae)
    {
       if(ae.getSource() == addFPB)
@@ -85,6 +90,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       arrangeElements();
    }
    
+   // update luck points field when name is entered
    public void keyPressed(KeyEvent ke){}
    public void keyTyped(KeyEvent ke){}
    public void keyReleased(KeyEvent ke)
@@ -92,6 +98,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       updateLuckPointsField();
    }
    
+   // clear a row
    public void clear()
    {
       luckPoints = 0;
@@ -101,11 +108,13 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       arrangeElements();
    }
    
+   // clear hasActed when a new round starts
    public void newRound()
    {
       hasActedCB.setSelected(false);
    }
    
+   // update the luck points field
    public void updateLuckPointsField()
    {
       if(nameF.getText().equals(""))
@@ -118,6 +127,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       }
    }
    
+   // stringify for saving
    public String serialize()
    {
       String name = nameF.getText();
@@ -127,6 +137,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       return name + DELIMITER + luckPoints + DELIMITER + initF.getText() + DELIMITER + hasActed;
    }
    
+   // set values from string
    public void deserialize(String str)
    {
       String[] strArr = str.split(DELIMITER);
@@ -140,6 +151,7 @@ public class CharacterPanel extends SoTPanel implements ActionListener, KeyListe
       arrangeElements();
    }
    
+   // arrange the container elements; implementation of abstract class in SoTPanel
    public void arrangeElements()
    {
       updateLuckPointsField();

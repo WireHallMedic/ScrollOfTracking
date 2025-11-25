@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+// panel that keeps track of torch timer. Time is stored as an int of seconds
 public class TimerPanel extends SoTPanel implements ActionListener, MouseListener
 {
 	private int curTime;
@@ -34,6 +35,7 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
 	public void setRunB(JButton r){runB = r;}
 	public void setResetB(JButton r){resetB = r;}
 
+   // initializer
    public TimerPanel(javax.swing.Timer t, SoTFrame parentF)
    {
       super();
@@ -57,11 +59,13 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
       displayTime();
    }
    
+   // reset time to its base value
    public void resetTime()
    {
       curTime = maxTime;
    }
    
+   // do stuff when timer or button triggers
    public void actionPerformed(ActionEvent ae)
    {
       if(ae.getSource() == timer)
@@ -84,6 +88,7 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
          displayTime();
    }
    
+   // pause timer if running, run if paused
    private void togglePause()
    {
       runF = !runF;
@@ -96,12 +101,14 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
          runB.setText("Start");
    }
    
+   // display remaining time
    public void displayTime()
    {
       timeF.setText(getTimeString());
       setColor();
    }
    
+   // set color based on time remaining, and alert parent to pass that to other components
    public void setColor()
    {
       Color lightColor = getLightColor();
@@ -124,6 +131,7 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
       return new Color(r, g, b);
    }
    
+   // arrange the container elements; implementation of abstract class in SoTPanel
    public void arrangeElements()
    {
       arrangeElement(timeF, .2, 0.1, .1, .8);
@@ -131,6 +139,7 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
       arrangeElement(resetB, .65, 0.1, .2, .8);
    }
    
+   // get time as a string from variables
    public String getTimeString()
    {
       int min = curTime / 60;
@@ -138,6 +147,7 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
       return String.format("%d:%02d", min, sec);
    }
    
+   // get time as an int from time field
    public int getTimeInt()
    {
       try
@@ -163,12 +173,13 @@ public class TimerPanel extends SoTPanel implements ActionListener, MouseListene
    public void mouseEntered(MouseEvent e) {}
    public void mouseExited(MouseEvent e) {}
 
-   
+   // stringify for saving
    public String serialize()
    {
       return "" + getTimeInt();
    }
    
+   // set values from string
    public void deserialize(String str)
    {
       curTime = Integer.parseInt(str);

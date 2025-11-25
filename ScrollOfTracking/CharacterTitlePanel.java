@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+// titles for characterPanels
 public class CharacterTitlePanel extends SoTPanel
 {
    public static final double SMALL_ELEMENT_WIDTH = CharacterPanel.SMALL_ELEMENT_WIDTH;
@@ -14,6 +15,7 @@ public class CharacterTitlePanel extends SoTPanel
    private SoTLabel initL;
    private SoTLabel actedL;
    
+   // initializer
    public CharacterTitlePanel()
    {
       super();
@@ -30,7 +32,7 @@ public class CharacterTitlePanel extends SoTPanel
       arrangeElements();
    }
    
-   
+   // arrange the container elements; implementation of abstract class in SoTPanel
    public void arrangeElements()
    {
       double xInset = 0.0;

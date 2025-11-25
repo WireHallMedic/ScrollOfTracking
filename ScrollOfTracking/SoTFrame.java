@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 
+// extension of JFrame that holds the application
 public class SoTFrame extends JFrame
 {
    private static final String VERSION_STRING = "v1.0.0";
@@ -19,6 +20,7 @@ public class SoTFrame extends JFrame
    
    public static final int CHARACTER_PANELS = 13;
    
+   // initializer
    public SoTFrame()
    {
       super();
@@ -51,6 +53,7 @@ public class SoTFrame extends JFrame
       setVisible(true);
    }
    
+   // alert components that a new round has started
    public void newRound()
    {
       for(int i = 0; i < CHARACTER_PANELS; i++)
@@ -59,6 +62,7 @@ public class SoTFrame extends JFrame
       }
    }
    
+   // alert components to clear all information
    public void clearAll()
    {
       for(int i = 0; i < CHARACTER_PANELS; i++)
@@ -67,6 +71,7 @@ public class SoTFrame extends JFrame
       }
    }
    
+   // set the background color of components
    public void setPanelBackgrounds(Color c)
    {
       if(backgroundPanel != null)
@@ -87,6 +92,7 @@ public class SoTFrame extends JFrame
       repaint();
    }
    
+   // save state to file
    public void save()
    {
       String[] output = new String[CHARACTER_PANELS + 1];
@@ -96,6 +102,7 @@ public class SoTFrame extends JFrame
       write(output);
    }
    
+   // load state from file
    public void load()
    {
       String[] strArr = read();
@@ -104,7 +111,8 @@ public class SoTFrame extends JFrame
          rowPanel[i].deserialize(strArr[i + 1]);
    }
    
-  public static void write(String[] output)
+   // write output; called by save()
+   public static void write(String[] output)
 	{
 		PrintWriter outFile = null;
 		try
@@ -123,6 +131,7 @@ public class SoTFrame extends JFrame
 		outFile.close();
 	}
    
+   // read input from file; called by load()
    public static String[] read()
 	{
 		Scanner inFile = null;

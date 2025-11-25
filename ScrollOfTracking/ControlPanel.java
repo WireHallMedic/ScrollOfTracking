@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+// panel at the bottom of the application with general controls
 public class ControlPanel extends SoTPanel implements ActionListener
 {
    private JButton newRoundB;
@@ -12,6 +13,7 @@ public class ControlPanel extends SoTPanel implements ActionListener
    private JButton loadB;
    private SoTFrame parentFrame;
    
+   // initializer
    public ControlPanel(SoTFrame pf)
    {
       super();
@@ -30,6 +32,7 @@ public class ControlPanel extends SoTPanel implements ActionListener
       add(loadB);
    }
    
+   // arrange the container elements; implementation of abstract class in SoTPanel
    public void arrangeElements()
    {
       arrangeElement(newRoundB, .025, 0.1, .2, .8);
@@ -38,6 +41,7 @@ public class ControlPanel extends SoTPanel implements ActionListener
       arrangeElement(loadB, .775, 0.1, .2, .8);
    }
    
+   // react when button is pressed
    public void actionPerformed(ActionEvent ae)
    {
       if(ae.getSource() == clearAllB)
